@@ -159,7 +159,7 @@ if __name__ == '__main__':
         save_folder = '../dataset/' + filename[:-3]
     else:
         # amazon dataset
-        save_folder = '../dataset/' + filename[:5]
+        save_folder = '../dataset/' + filename[:-5]
     print(f"数据集名称：{save_folder}")
 
     if not os.path.exists(save_folder + '/train'):

@@ -10,12 +10,12 @@ class DefaultConfig:
 
     # -------------base config-----------------------#
     use_gpu = True
-    gpu_id = 1
+    gpu_id = 0
     multi_gpu = False
     gpu_ids = []
 
     seed = 2019
-    num_epochs = 20
+    num_epochs = 30
     num_workers = 0
 
     optimizer = 'Adam'

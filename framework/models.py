@@ -43,10 +43,7 @@ class Model(nn.Module):
         return output
 
     def load(self, path):
-        '''
-        加载指定模型
-        '''
-        self.load_state_dict(torch.load(path))
+        self.load_state_dict('/content/Neu-Review-Rec/checkpoints/deepconn.pth', strict=False)
 
     def save(self, epoch=None, name=None, opt=None):
         '''
@@ -58,5 +55,5 @@ class Model(nn.Module):
             name = time.strftime(name + '%m%d_%H:%M:%S.pth')
         else:
             name = prefix + self.model_name + '_' + str(name) + '_' + str(opt) + '.pth'
-        torch.save(self.state_dict(), name)
+        torch.save(self.state_dict(), '/content/Neu-Review-Rec/checkpoints/deepconn.pth')
         return name

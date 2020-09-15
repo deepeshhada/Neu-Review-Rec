@@ -136,6 +136,10 @@ def train(**kwargs):
     print(f"{now()} {opt.dataset} {opt.print_opt} best_res:  {best_res}")
     print("----"*20)
 
+    print("Train MSE:", train_mse_list)
+    print("Val MSE:", val_mse_list)
+    print("Val MAE:", val_mae_list)
+
 
 def test(**kwargs):
 

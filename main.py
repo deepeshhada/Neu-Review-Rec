@@ -69,6 +69,10 @@ def train(**kwargs):
     mae_func = nn.L1Loss()
     smooth_mae_func = nn.SmoothL1Loss()
 
+    train_mse_list = []
+    val_mse_list = []
+    val_mae_list = []
+
     for epoch in range(opt.num_epochs):
         total_loss = 0.0
         total_maeloss = 0.0
@@ -115,6 +119,11 @@ def train(**kwargs):
         print(f"\ttrain data: loss:{total_loss:.4f}, mse: {mse:.4f};")
 
         val_loss, val_mse, val_mae = predict(model, val_data_loader, opt)
+        
+        train_mse_list.append(mse)
+        val_mse_list.append(val_mse)
+        val_mae_list.append(val_mae)
+
         if val_loss < min_loss:
             model.save(name=opt.dataset, opt=opt.print_opt)
             min_loss = val_loss

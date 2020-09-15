@@ -1,5 +1,6 @@
 A Toolkit for Neural Review-based Recommendation models in Pytorch. 
-ShomyLiu's original [repository](https://github.com/ShomyLiu/Neu-Review-Rec)
+
+ShomyLiu's original repository can be found [here](https://github.com/ShomyLiu/Neu-Review-Rec).
 
 ## Citation
 If you use the code, please cite:

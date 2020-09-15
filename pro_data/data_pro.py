@@ -196,7 +196,10 @@ if __name__ == '__main__':
             if str(js['asin']) == 'unknown':
                 print("unkown item id")
                 continue
-            reviews.append(js['reviewText'])
+            try:
+                reviews.append(js['reviewText'])
+            except:
+                continue
             users_id.append(str(js['reviewerID']))
             items_id.append(str(js['asin']))
             ratings.append(str(js['overall']))

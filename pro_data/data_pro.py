@@ -156,10 +156,10 @@ if __name__ == '__main__':
     if len(sys.argv) > 2 and sys.argv[2] == 'yelp':
         # yelp dataset
         yelp_data = True
-        save_folder = '../dataset/' + filename[:-3]+"_data"
+        save_folder = '../dataset/' + filename[:-3]
     else:
         # amazon dataset
-        save_folder = '../dataset/' + filename[:-7]+"_data"
+        save_folder = '../dataset/' + filename[:-7]
     print(f"数据集名称：{save_folder}")
 
     if not os.path.exists(save_folder + '/train'):

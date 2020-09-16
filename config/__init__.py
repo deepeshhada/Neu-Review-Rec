@@ -13,7 +13,10 @@ from .config import DefaultConfig
 # from .config import yelp2013_data_Config
 # from .config import yelp2014_data_Config
 # from .config import Musical_Instruments_data_Config
-from .config import Digital_Music_data_Config
+from .config import AmazonInstantVideo_Config
+from .config import AmazonLuxuryBeauty_Config
+from .config import AmazonDigitalMusic_Config
+from .config import AmazonMusicalInstruments_Config
 # from .config import yelp2016_data_Config
 # from .config import Tools_Improvement_data_Config
 # from .config import Automotive_data_Config

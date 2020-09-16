@@ -15,7 +15,7 @@ class DefaultConfig:
     gpu_ids = []
 
     seed = 2019
-    num_epochs = 50
+    num_epochs = 60
     num_workers = 0
 
     optimizer = 'Adam'
@@ -91,7 +91,55 @@ class DefaultConfig:
         print('*************************************************')
 
 
-class Digital_Music_data_Config(DefaultConfig):
+class AmazonInstantVideo_Config(DefaultConfig):
+
+    def __init__(self):
+        self.set_path('AmazonInstantVideo')
+
+    vocab_size = 49240
+    word_dim = 300
+
+    r_max_len = 202
+
+    u_max_r = 13
+    i_max_r = 24
+
+    train_data_size = 29700
+    test_data_size = 3713
+    val_data_size = 3713
+
+    user_num = 5130 + 2
+    item_num = 1685 + 2
+
+    batch_size = 128
+    print_step = 100
+
+
+class AmazonLuxuryBeauty_Config(DefaultConfig):
+
+    def __init__(self):
+        self.set_path('AmazonLuxuryBeauty')
+
+    vocab_size = 24150
+    word_dim = 300
+
+    r_max_len = 202
+
+    u_max_r = 13
+    i_max_r = 24
+
+    train_data_size = 27424
+    test_data_size = 3421
+    val_data_size = 3420
+
+    user_num = 3818 + 2
+    item_num = 1581 + 2
+
+    batch_size = 128
+    print_step = 100
+
+
+class AmazonDigitalMusic_Config(DefaultConfig):
 
     def __init__(self):
         self.set_path('AmazonDigitalMusic')
@@ -110,6 +158,30 @@ class Digital_Music_data_Config(DefaultConfig):
 
     user_num = 5541 + 2
     item_num = 3568 + 2
+
+    batch_size = 128
+    print_step = 100
+
+
+class AmazonMusicalInstruments_Config(DefaultConfig):
+
+    def __init__(self):
+        self.set_path('AmazonMusicalInstruments')
+
+    vocab_size = 50002
+    word_dim = 300
+
+    r_max_len = 202
+
+    u_max_r = 13
+    i_max_r = 24
+
+    train_data_size = 185121
+    test_data_size = 23112
+    val_data_size = 23111
+
+    user_num = 27528 + 2
+    item_num = 10620 + 2
 
     batch_size = 128
     print_step = 100

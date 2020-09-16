@@ -28,7 +28,7 @@ def collate_fn(batch):
 def train(**kwargs):
 
     if 'dataset' not in kwargs:
-        opt = getattr(config, 'Digital_Music_data_Config')()
+        opt = getattr(config, 'AmazonDigitalMusic_Config')()
     else:
         opt = getattr(config, kwargs['dataset'] + '_Config')()
     opt.parse(kwargs)
@@ -144,7 +144,7 @@ def train(**kwargs):
 def test(**kwargs):
 
     if 'dataset' not in kwargs:
-        opt = getattr(config, 'Digital_Music_data_Config')()
+        opt = getattr(config, 'AmazonDigitalMusic_Config')()
     else:
         opt = getattr(config, kwargs['dataset'] + '_Config')()
     opt.parse(kwargs)

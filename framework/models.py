@@ -43,7 +43,7 @@ class Model(nn.Module):
         return output
 
     def load(self, path):
-        self.load_state_dict(torch.load('./deepconn.pth'), strict=False)
+        self.load_state_dict(torch.load('./model.pth'), strict=False)
 
     def save(self, epoch=None, name=None, opt=None):
         '''
@@ -55,5 +55,5 @@ class Model(nn.Module):
             name = time.strftime(name + '%m%d_%H:%M:%S.pth')
         else:
             name = prefix + self.model_name + '_' + str(name) + '_' + str(opt) + '.pth'
-        torch.save(self.state_dict(), './deepconn.pth')
+        torch.save(self.state_dict(), './model.pth')
         return name

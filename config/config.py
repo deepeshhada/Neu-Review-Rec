@@ -5,8 +5,8 @@ import numpy as np
 
 class DefaultConfig:
 
-    model = 'DeepCoNN'
-    dataset = 'Digital_Music_data'
+    model = 'MPCN'
+    dataset = 'AmazonDigitalMusic'
 
     # -------------base config-----------------------#
     use_gpu = True
@@ -15,7 +15,7 @@ class DefaultConfig:
     gpu_ids = []
 
     seed = 2019
-    num_epochs = 30
+    num_epochs = 50
     num_workers = 0
 
     optimizer = 'Adam'
@@ -94,7 +94,7 @@ class DefaultConfig:
 class Digital_Music_data_Config(DefaultConfig):
 
     def __init__(self):
-        self.set_path('Digital_Music_data')
+        self.set_path('AmazonDigitalMusic')
 
     vocab_size = 50002
     word_dim = 300

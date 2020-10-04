@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import json
+import copy
 import pandas as pd
 import re
 import sys
@@ -326,7 +327,8 @@ if __name__ == '__main__':
             item_reviews_dict[i[1]] = [str_review]
             item_uid_dict[i[1]] = [i[0]]
     
-    print(user_reviews_dict[2])
+    plain_user_reviews_dict = copy.deepcopy(user_reviews_dict)
+    plain_item_reviews_dict = copy.deepcopy(item_reviews_dict)
 
     vocab, user_review2doc, item_review2doc, user_reviews_dict, item_reviews_dict = build_doc(user_reviews_dict, item_reviews_dict)
     word_index = {}
@@ -454,10 +456,12 @@ if __name__ == '__main__':
     np.save(f"{save_folder}/train/userReview2Index.npy", userReview2Index)
     np.save(f"{save_folder}/train/user_item2id.npy", user_iid_list)
     np.save(f"{save_folder}/train/userDoc2Index.npy", userDoc2Index)
+    np.save(f"{save_folder}/train/plainUserReviews.npy", plain_user_reviews_dict)
 
     np.save(f"{save_folder}/train/itemReview2Index.npy", itemReview2Index)
     np.save(f"{save_folder}/train/item_user2id.npy", item_uid_list)
     np.save(f"{save_folder}/train/itemDoc2Index.npy", itemDoc2Index)
+    np.save(f"{save_folder}/train/plainItemReviews.npy", plain_item_reviews_dict)
 
     print(f"{now()} write finised")
 

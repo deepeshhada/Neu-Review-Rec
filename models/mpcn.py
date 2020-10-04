@@ -86,6 +86,53 @@ class MPCN(nn.Module):
 
         return torch.stack([u_fea], 1), torch.stack([i_fea], 1)
 
+    
+    def get_conditional_sentence(self, datas):
+        '''
+        user_reviews, item_reviews, uids, iids, \
+        user_item2id, item_user2id, user_doc, item_doc = datas
+        :user_reviews: B * L1 * N
+        :item_reviews: B * L2 * N
+        '''
+        user_reviews, item_reviews, _, _, _, _, _, _ = datas
+
+        # ------------------review-level co-attention ---------------------------------
+        u_word_embs = self.user_word_embs(user_reviews)
+        i_word_embs = self.item_word_embs(item_reviews)
+        u_reviews = self.review_gate(u_word_embs)
+        i_reviews = self.review_gate(i_word_embs)
+        u_fea = []
+        i_fea = []
+        # assume batch_size = 1
+        for i in range(self.head):
+            r_coatt = self.review_coatt[i]
+            w_coatt = self.word_coatt[i]
+
+            # ------------------review-level co-attention ---------------------------------
+            p_u, p_i = r_coatt(u_reviews, i_reviews)             # B * L1/2 * 1
+            return (p_u, p_i)
+
+            # ------------------word-level co-attention ---------------------------------
+            # u_r_words = user_reviews.permute(0, 2, 1).float().bmm(p_u)   # (B * N * L1) X (B * L1 * 1)
+            # i_r_words = item_reviews.permute(0, 2, 1).float().bmm(p_i)   # (B * N * L2) X (B * L2 * 1)
+            # u_words = self.user_word_embs(u_r_words.squeeze(2).long())  # B * N * d
+            # i_words = self.item_word_embs(i_r_words.squeeze(2).long())  # B * N * d
+            # p_u, p_i = w_coatt(u_words, i_words)                 # B * N * 1
+            # u_w_fea = u_words.permute(0, 2, 1).bmm(p_u).squeeze(2)
+            # i_w_fea = u_words.permute(0, 2, 1).bmm(p_i).squeeze(2)
+            # u_fea.append(u_w_fea)
+            # i_fea.append(i_w_fea)
+
+        # u_fea = torch.cat(u_fea, 1)
+        # i_fea = torch.cat(i_fea, 1)
+
+        # u_fea = self.drop_out(self.u_fc(u_fea))
+        # i_fea = self.drop_out(self.i_fc(i_fea))
+
+        # return torch.stack([u_fea], 1), torch.stack([i_fea], 1)
+
+    
+    
     def review_gate(self, reviews):
         # Eq 1
         reviews = reviews.sum(2)

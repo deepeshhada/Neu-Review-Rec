@@ -300,6 +300,8 @@ if __name__ == '__main__':
     # 2: build vocabulary only with train dataset
     user_reviews_dict = {}
     item_reviews_dict = {}
+    plain_user_reviews_dict = {}
+    plain_item_reviews_dict = {}
     user_iid_dict = {}
     item_uid_dict = {}
     user_len = defaultdict(int)
@@ -307,7 +309,6 @@ if __name__ == '__main__':
 
     for i in data_train.values:
         str_review = clean_str(i[3].encode('ascii', 'ignore').decode('ascii'))
-
         if len(str_review.strip()) == 0:
             str_review = "<unk>"
 
@@ -324,6 +325,8 @@ if __name__ == '__main__':
         else:
             item_reviews_dict[i[1]] = [str_review]
             item_uid_dict[i[1]] = [i[0]]
+    
+    print(user_reviews_dict[2])
 
     vocab, user_review2doc, item_review2doc, user_reviews_dict, item_reviews_dict = build_doc(user_reviews_dict, item_reviews_dict)
     word_index = {}
@@ -409,7 +412,7 @@ if __name__ == '__main__':
 
         userReview2Index.append(padding_text(u_reviewList, u_pReviewLen))
         userDoc2Index.append(doc2index)
-
+    index_word = dict((v,k) for k,v in word_index.items())
     # userReview2Index = []
     userDoc2Index, userDocLen = padding_doc(userDoc2Index)
     print(f"user document length: {userDocLen}")

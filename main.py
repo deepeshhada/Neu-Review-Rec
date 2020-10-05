@@ -206,11 +206,27 @@ def generate_conditional_sentence(**kwargs):
 
     model.eval()
     with torch.no_grad():
+        user_review_dict = np.load("./dataset/AmazonDigitalMusic/train/plainUserReviews.npy", allow_pickle=True).item()
+        item_review_dict = np.load("./dataset/AmazonDigitalMusic/train/plainItemReviews.npy", allow_pickle=True).item()
+        cnt = 10
         for idx, (test_input, scores) in enumerate(test_data_loader):
-            test_input = unpack_input(opt, test_input)
-            output = model(test_input, mode="Generate")
-            print(output)
-            break
+            if idx == cnt:
+                test_input = unpack_input(opt, test_input)
+                output = model(test_input, mode="Generate")
+
+                uid = test_input[2].item()
+                user_reviews = user_review_dict[uid]
+                iid = test_input[3].item()
+                item_reviews = item_review_dict[iid]
+                
+                imp_user_review_id = output[0].cpu().numpy().squeeze()
+                imp_user_review_id = np.argmax(imp_user_review_id)
+                print(user_reviews[imp_user_review_id])
+
+                imp_item_review_id = output[1].cpu().numpy().squeeze()
+                imp_item_review_id = np.argmax(imp_item_review_id)
+                print(item_reviews[imp_item_review_id])
+                break
 
 
 def predict(model, data_loader, opt):

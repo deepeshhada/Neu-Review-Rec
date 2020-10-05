@@ -37,6 +37,7 @@ class MPCN(nn.Module):
 
         self.drop_out = nn.Dropout(opt.drop_out)
         self.reset_para()
+        
 
     def fc_layer(self):
         return nn.Sequential(
@@ -45,13 +46,16 @@ class MPCN(nn.Module):
             nn.Linear(self.opt.word_dim, self.opt.id_emb_size)
         )
 
-    def forward(self, datas):
+    def forward(self, datas, mode="Train"):
         '''
         user_reviews, item_reviews, uids, iids, \
         user_item2id, item_user2id, user_doc, item_doc = datas
         :user_reviews: B * L1 * N
         :item_reviews: B * L2 * N
         '''
+        if mode == "Generate":
+            return self.get_conditional_sentence(datas)
+        
         user_reviews, item_reviews, _, _, _, _, _, _ = datas
 
         # ------------------review-level co-attention ---------------------------------
@@ -86,7 +90,6 @@ class MPCN(nn.Module):
 
         return torch.stack([u_fea], 1), torch.stack([i_fea], 1)
 
-    
     def get_conditional_sentence(self, datas):
         '''
         user_reviews, item_reviews, uids, iids, \

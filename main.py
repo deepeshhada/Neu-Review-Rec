@@ -208,7 +208,7 @@ def generate_conditional_sentence(**kwargs):
     with torch.no_grad():
         for idx, (test_input, scores) in enumerate(test_data_loader):
             test_input = unpack_input(opt, test_input)
-            output = model.get_conditional_sentence(test_input)
+            output = model(test_input, mode="Generate")
             print(output)
             break
 

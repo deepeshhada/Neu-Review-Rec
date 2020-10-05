@@ -113,7 +113,7 @@ class MPCN(nn.Module):
 
             # ------------------review-level co-attention ---------------------------------
             p_u, p_i = r_coatt(u_reviews, i_reviews)             # B * L1/2 * 1
-            return (p_u, p_i)
+            return p_u, p_i
 
             # ------------------word-level co-attention ---------------------------------
             # u_r_words = user_reviews.permute(0, 2, 1).float().bmm(p_u)   # (B * N * L1) X (B * L1 * 1)

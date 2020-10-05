@@ -32,10 +32,13 @@ class Model(nn.Module):
         self.predict_net = PredictionLayer(opt)
         self.dropout = nn.Dropout(self.opt.drop_out)
 
-    def forward(self, datas):
+    def forward(self, datas, mode="Train"):
 
         user_reviews, item_reviews, uids, iids, user_item2id, item_user2id, user_doc, item_doc = datas
-        user_feature, item_feature = self.net(datas)
+        user_feature, item_feature = self.net(datas, mode)
+
+        if mode == "Generate":
+            return user_feature, item_feature
 
         ui_feature = self.fusion_net(user_feature, item_feature)
         ui_feature = self.dropout(ui_feature)

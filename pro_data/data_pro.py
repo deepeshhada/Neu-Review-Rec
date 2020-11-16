@@ -17,7 +17,7 @@ P_REVIEW = 0.85
 MAX_DF = 0.7
 MAX_VOCAB = 50000
 DOC_LEN = 500
-PRE_W2V_BIN_PATH = ""  # the pre-trained word2vec files
+PRE_W2V_BIN_PATH = "/content/Neu-Review-Rec/pro_data/GoogleNews-vectors-negative300.bin.gz"  # the pre-trained word2vec files
 
 
 def now():

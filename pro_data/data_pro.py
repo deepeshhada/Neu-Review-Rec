@@ -272,6 +272,8 @@ if __name__ == '__main__':
 
     columns_titles = ['user_id', 'item_id', 'rating', 'review']
     data_train = data_train.reindex(columns=columns_titles)
+    data_val = data_train.reindex(columns=columns_titles)
+    data_test = data_train.reindex(columns=columns_titles)
 
     uidList_train, iidList_train = get_count(data_train, 'user_id'), get_count(data_train, 'item_id')
     userNum = len(uidList_train)

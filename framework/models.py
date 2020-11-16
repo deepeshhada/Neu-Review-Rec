@@ -35,7 +35,7 @@ class Model(nn.Module):
     def forward(self, datas, mode="Train"):
 
         user_reviews, item_reviews, uids, iids, user_item2id, item_user2id, user_doc, item_doc = datas
-        user_feature, item_feature = self.net(datas, mode)
+        user_feature, item_feature = self.net(datas)
 
         if mode == "Generate":
             return user_feature, item_feature

@@ -152,6 +152,10 @@ if __name__ == '__main__':
     assert(len(sys.argv) >= 2)
     filename = sys.argv[1]
 
+    load_splits = True
+    dataset_name = 'AmazonDigitalMusic'
+    split_save_path = "/content/drive/My Drive/Colab Data/M.Tech. Project/saved splits/Amazon/" + dataset_name + "/PPER v1/"
+
     yelp_data = False
     if len(sys.argv) > 2 and sys.argv[2] == 'yelp':
         # yelp dataset
@@ -175,40 +179,45 @@ if __name__ == '__main__':
 
     print(f"{now()}: Step1: loading raw review datasets...")
 
-    users_id = []
-    items_id = []
-    ratings = []
-    reviews = []
-
-    if yelp_data:
-        for line in file:
-            value = line.split('\t')
-            reviews.append(value[2])
-            users_id.append(value[0])
-            items_id.append(value[1])
-            ratings.append(value[3])
+    if load_splits:
+        data = pd.read_csv(split_save_path + 'df.csv')
+        data.columns = ['user_id', 'item_id', 'reviews', 'ratings']
+        data = data.reindex(columns=['user_id', 'item_id', 'ratings', 'reviews'])
     else:
-        for line in file:
-            js = json.loads(line)
-            if str(js['reviewerID']) == 'unknown':
-                print("unknown user id")
-                continue
-            if str(js['asin']) == 'unknown':
-                print("unkown item id")
-                continue
-            try:
-                reviews.append(js['reviewText'])
-            except:
-                continue
-            users_id.append(str(js['reviewerID']))
-            items_id.append(str(js['asin']))
-            ratings.append(str(js['overall']))
+        users_id = []
+        items_id = []
+        ratings = []
+        reviews = []
 
-    data_frame = {'user_id': pd.Series(users_id), 'item_id': pd.Series(items_id),
-                  'ratings': pd.Series(ratings), 'reviews': pd.Series(reviews)}
-    data = pd.DataFrame(data_frame)     # [['user_id', 'item_id', 'ratings', 'reviews']]
-    del users_id, items_id, ratings, reviews
+        if yelp_data:
+            for line in file:
+                value = line.split('\t')
+                reviews.append(value[2])
+                users_id.append(value[0])
+                items_id.append(value[1])
+                ratings.append(value[3])
+        else:
+            for line in file:
+                js = json.loads(line)
+                if str(js['reviewerID']) == 'unknown':
+                    print("unknown user id")
+                    continue
+                if str(js['asin']) == 'unknown':
+                    print("unkown item id")
+                    continue
+                try:
+                    reviews.append(js['reviewText'])
+                except:
+                    continue
+                users_id.append(str(js['reviewerID']))
+                items_id.append(str(js['asin']))
+                ratings.append(str(js['overall']))
 
+        data_frame = {'user_id': pd.Series(users_id), 'item_id': pd.Series(items_id),
+                    'ratings': pd.Series(ratings), 'reviews': pd.Series(reviews)}
+        data = pd.DataFrame(data_frame)     # [['user_id', 'item_id', 'ratings', 'reviews']]
+        del users_id, items_id, ratings, reviews
+    
     uidList, iidList = get_count(data, 'user_id'), get_count(data, 'item_id')
     userNum_all = len(uidList)
     itemNum_all = len(iidList)
@@ -224,56 +233,57 @@ if __name__ == '__main__':
     data = numerize(data)
 
     print(f"-"*60)
-    print(f"{now()} Step2: split datsets into train/val/test, save into npy data")
-    data_train, data_test = train_test_split(data, test_size=0.2, random_state=1234)
-    uids_train, iids_train = get_count(data_train, 'user_id'), get_count(data_train, 'item_id')
-    userNum = len(uids_train)
-    itemNum = len(iids_train)
-    print("===============Start: no-preprocess: trainData size======================")
-    print("dataNum: {}".format(data_train.shape[0]))
-    print("userNum: {}".format(userNum))
-    print("itemNum: {}".format(itemNum))
-    print("===============End: no-preprocess: trainData size========================")
 
-    uidMiss = []
-    iidMiss = []
-    if userNum != userNum_all or itemNum != itemNum_all:
-        for uid in range(userNum_all):
-            if uid not in uids_train:
-                uidMiss.append(uid)
-        for iid in range(itemNum_all):
-            if iid not in iids_train:
-                iidMiss.append(iid)
-    uid_index = []
-    for uid in uidMiss:
-        index = data_test.index[data_test['user_id'] == uid].tolist()
-        uid_index.extend(index)
-    data_train = pd.concat([data_train, data_test.loc[uid_index]])
+    if load_splits:
+        data_train = pd.read_csv(split_save_path + 'train_df.csv')
+        data_val = pd.read_csv(split_save_path + 'val_df.csv')
+        data_test = pd.read_csv(split_save_path + 'test_df.csv')
 
-    iid_index = []
-    for iid in iidMiss:
-        index = data_test.index[data_test['item_id'] == iid].tolist()
-        iid_index.extend(index)
-    data_train = pd.concat([data_train, data_test.loc[iid_index]])
+        data_train.columns = ['user_id', 'item_id', 'reviews', 'ratings']
+        data_val.columns = ['user_id', 'item_id', 'reviews', 'ratings']
+        data_test.columns = ['user_id', 'item_id', 'reviews', 'ratings']
 
-    all_index = list(set().union(uid_index, iid_index))
-    data_test = data_test.drop(all_index)
+        data_train = data_train.reindex(columns=['user_id', 'item_id', 'ratings', 'reviews'])
+        data_val = data_val.reindex(columns=['user_id', 'item_id', 'ratings', 'reviews'])
+        data_test = data_test.reindex(columns=['user_id', 'item_id', 'ratings', 'reviews'])
+    else:
+        print(f"{now()} Step2: split datsets into train/val/test, save into npy data")
+        data_train, data_test = train_test_split(data, test_size=0.2, random_state=1234)
+        uids_train, iids_train = get_count(data_train, 'user_id'), get_count(data_train, 'item_id')
+        userNum = len(uids_train)
+        itemNum = len(iids_train)
+        print("===============Start: no-preprocess: trainData size======================")
+        print("dataNum: {}".format(data_train.shape[0]))
+        print("userNum: {}".format(userNum))
+        print("itemNum: {}".format(itemNum))
+        print("===============End: no-preprocess: trainData size========================")
 
-    # split validate set aand test set
-    data_test, data_val = train_test_split(data_test, test_size=0.5, random_state=1234)
+        uidMiss = []
+        iidMiss = []
+        if userNum != userNum_all or itemNum != itemNum_all:
+            for uid in range(userNum_all):
+                if uid not in uids_train:
+                    uidMiss.append(uid)
+            for iid in range(itemNum_all):
+                if iid not in iids_train:
+                    iidMiss.append(iid)
+        uid_index = []
+        for uid in uidMiss:
+            index = data_test.index[data_test['user_id'] == uid].tolist()
+            uid_index.extend(index)
+        data_train = pd.concat([data_train, data_test.loc[uid_index]])
 
-    dataset_name = 'AmazonDigitalMusic'
-    # load saved splits
-    split_save_path = "/content/drive/My Drive/Colab Data/M.Tech. Project/saved splits/Amazon/" + dataset_name + "/PPER v1/"
-    df = pd.read_csv(split_save_path + 'df.csv')
-    data_train = pd.read_csv(split_save_path + 'train_df.csv')
-    data_val = pd.read_csv(split_save_path + 'val_df.csv')
-    data_test = pd.read_csv(split_save_path + 'test_df.csv')
+        iid_index = []
+        for iid in iidMiss:
+            index = data_test.index[data_test['item_id'] == iid].tolist()
+            iid_index.extend(index)
+        data_train = pd.concat([data_train, data_test.loc[iid_index]])
 
-    columns_titles = ['user_id', 'item_id', 'rating', 'review']
-    data_train = data_train.reindex(columns=columns_titles)
-    data_val = data_val.reindex(columns=columns_titles)
-    data_test = data_test.reindex(columns=columns_titles)
+        all_index = list(set().union(uid_index, iid_index))
+        data_test = data_test.drop(all_index)
+
+        # split validate set aand test set
+        data_test, data_val = train_test_split(data_test, test_size=0.5, random_state=1234)
 
     uidList_train, iidList_train = get_count(data_train, 'user_id'), get_count(data_train, 'item_id')
     userNum = len(uidList_train)

@@ -5,7 +5,7 @@ import numpy as np
 
 class DefaultConfig:
 
-    model = 'MPCN'
+    model = 'DeepCoNN'
     dataset = 'AmazonDigitalMusic'
 
     # -------------base config-----------------------#
@@ -15,7 +15,7 @@ class DefaultConfig:
     gpu_ids = []
 
     seed = 2019
-    num_epochs = 1
+    num_epochs = 50
     num_workers = 0
 
     optimizer = 'Adam'

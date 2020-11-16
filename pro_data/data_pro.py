@@ -261,6 +261,18 @@ if __name__ == '__main__':
 
     # split validate set aand test set
     data_test, data_val = train_test_split(data_test, test_size=0.5, random_state=1234)
+
+    dataset_name = 'AmazonDigitalMusic'
+    # load saved splits
+    split_save_path = "/content/drive/My Drive/Colab Data/M.Tech. Project/saved splits/Amazon/" + dataset_name + "/PPER v1/"
+    df = pd.read_csv(split_save_path + 'df.csv')
+    data_train = pd.read_csv(split_save_path + 'train_df.csv')
+    data_val = pd.read_csv(split_save_path + 'val_df.csv')
+    data_test = pd.read_csv(split_save_path + 'test_df.csv')
+
+    columns_titles = ['user_id', 'item_id', 'rating', 'review']
+    data_train = data_train.reindex(columns=columns_titles)
+
     uidList_train, iidList_train = get_count(data_train, 'user_id'), get_count(data_train, 'item_id')
     userNum = len(uidList_train)
     itemNum = len(iidList_train)

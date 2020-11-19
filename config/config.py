@@ -6,7 +6,7 @@ import numpy as np
 class DefaultConfig:
 
     model = 'DeepCoNN'
-    dataset = 'AmazonDigitalMusic'
+    dataset = 'AmazonOfficeProducts'
 
     # -------------base config-----------------------#
     use_gpu = True
@@ -182,6 +182,30 @@ class AmazonMusicalInstruments_Config(DefaultConfig):
 
     user_num = 27528 + 2
     item_num = 10620 + 2
+
+    batch_size = 128
+    print_step = 100
+
+
+class AmazonOfficeProducts_Config(DefaultConfig):
+
+    def __init__(self):
+        self.set_path('AmazonOfficeProducts')
+
+    vocab_size = 47744
+    word_dim = 300
+
+    r_max_len = 202
+
+    u_max_r = 13
+    i_max_r = 24
+
+    train_data_size = 42641
+    test_data_size = 5298
+    val_data_size = 5298
+
+    user_num = 4905 + 2
+    item_num = 2420 + 2
 
     batch_size = 128
     print_step = 100

@@ -17,7 +17,8 @@ P_REVIEW = 0.85
 MAX_DF = 0.7
 MAX_VOCAB = 50000
 DOC_LEN = 500
-PRE_W2V_BIN_PATH = "/content/Neu-Review-Rec/pro_data/GoogleNews-vectors-negative300.bin.gz"  # the pre-trained word2vec files
+# PRE_W2V_BIN_PATH = "/content/Neu-Review-Rec/pro_data/GoogleNews-vectors-negative300.bin.gz"  # the pre-trained word2vec files
+PRE_W2V_BIN_PATH = ""  # the pre-trained word2vec files
 
 
 def now():
@@ -153,7 +154,7 @@ if __name__ == '__main__':
     filename = sys.argv[1]
 
     load_splits = True
-    dataset_name = 'AmazonDigitalMusic'
+    dataset_name = sys.argv[1][:-5]
     split_save_path = "/content/drive/My Drive/Colab Data/M.Tech. Project/saved splits/Amazon/" + dataset_name + "/PPER v1/"
 
     yelp_data = False
@@ -429,6 +430,7 @@ if __name__ == '__main__':
             wordTokens = text.strip().split()
             if len(wordTokens) == 0:
                 wordTokens = ['unk']
+                continue
             text2index = [word_index[w] for w in wordTokens]
             if len(text2index) < maxSentLen:
                 text2index = text2index + [0] * (maxSentLen - len(text2index))
@@ -461,6 +463,7 @@ if __name__ == '__main__':
             wordTokens = text.strip().split()
             if len(wordTokens) == 0:
                 wordTokens = ['unk']
+                continue
             text2index = [word_index[w] for w in wordTokens]
             if len(text2index) < maxSentLen:
                 text2index = text2index + [0] * (maxSentLen - len(text2index))

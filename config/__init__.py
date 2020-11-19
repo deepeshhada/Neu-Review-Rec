@@ -17,6 +17,7 @@ from .config import AmazonInstantVideo_Config
 from .config import AmazonLuxuryBeauty_Config
 from .config import AmazonDigitalMusic_Config
 from .config import AmazonMusicalInstruments_Config
+from .config import AmazonOfficeProducts_Config
 # from .config import yelp2016_data_Config
 # from .config import Tools_Improvement_data_Config
 # from .config import Automotive_data_Config

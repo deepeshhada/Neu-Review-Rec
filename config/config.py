@@ -209,3 +209,27 @@ class AmazonOfficeProducts_Config(DefaultConfig):
 
     batch_size = 128
     print_step = 100
+
+
+class AmazonBaby_Config(DefaultConfig):
+
+    def __init__(self):
+        self.set_path('AmazonBaby')
+
+    vocab_size = 50002
+    word_dim = 300
+
+    r_max_len = 202
+
+    u_max_r = 13
+    i_max_r = 24
+
+    train_data_size = 128849
+    test_data_size = 15943
+    val_data_size = 15940
+
+    user_num = 19445 + 2
+    item_num = 7050 + 2
+
+    batch_size = 128
+    print_step = 100

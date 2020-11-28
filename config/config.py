@@ -257,3 +257,27 @@ class AmazonClothing_Config(DefaultConfig):
 
     batch_size = 128
     print_step = 100
+
+
+class AmazonPet_Config(DefaultConfig):
+
+    def __init__(self):
+        self.set_path('AmazonPet')
+
+    vocab_size = 50002
+    word_dim = 300
+
+    r_max_len = 202
+
+    u_max_r = 13
+    i_max_r = 24
+
+    train_data_size = 126508
+    test_data_size = 15664
+    val_data_size = 15664
+
+    user_num = 19856 + 2
+    item_num = 8510 + 2
+
+    batch_size = 128
+    print_step = 100

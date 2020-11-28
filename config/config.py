@@ -152,9 +152,9 @@ class AmazonDigitalMusic_Config(DefaultConfig):
     u_max_r = 13
     i_max_r = 24
 
-    train_data_size = 51764
-    test_data_size = 6471
-    val_data_size = 6471
+    train_data_size = 51808
+    test_data_size = 6449
+    val_data_size = 6449
 
     user_num = 5541 + 2
     item_num = 3568 + 2

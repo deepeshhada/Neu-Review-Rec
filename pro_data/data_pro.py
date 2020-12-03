@@ -183,6 +183,7 @@ if __name__ == '__main__':
     if load_splits:
         data = pd.read_csv(split_save_path + 'df.csv')
         data.columns = ['user_id', 'item_id', 'reviews', 'ratings']
+        print(data)
         data = data.reindex(columns=['user_id', 'item_id', 'ratings', 'reviews'])
     else:
         users_id = []
@@ -390,8 +391,11 @@ if __name__ == '__main__':
         if len(textList) >= num:
             new_textList = textList[:num]
         else:
-            padding = [[0] * len(textList[0]) for _ in range(num - len(textList))]
-            new_textList = textList + padding
+            try:
+                padding = [[0] * len(textList[0]) for _ in range(num - len(textList))]
+                new_textList = textList + padding
+            except:
+                textList = []
         return new_textList
 
     def padding_ids(iids, num, pad_id):

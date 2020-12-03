@@ -259,10 +259,10 @@ class AmazonClothing_Config(DefaultConfig):
     print_step = 100
 
 
-class AmazonPet_Config(DefaultConfig):
+class AmazonToysAndGames_Config(DefaultConfig):
 
     def __init__(self):
-        self.set_path('AmazonPet')
+        self.set_path('AmazonToysAndGames')
 
     vocab_size = 50002
     word_dim = 300
@@ -272,12 +272,12 @@ class AmazonPet_Config(DefaultConfig):
     u_max_r = 13
     i_max_r = 24
 
-    train_data_size = 126508
-    test_data_size = 15664
-    val_data_size = 15664
+    train_data_size = 134390
+    test_data_size = 16604
+    val_data_size = 16603
 
-    user_num = 19856 + 2
-    item_num = 8510 + 2
+    user_num = 19412 + 2
+    item_num = 11924 + 2
 
     batch_size = 128
     print_step = 100

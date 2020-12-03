@@ -155,7 +155,7 @@ if __name__ == '__main__':
 
     load_splits = True
     dataset_name = sys.argv[1][:-5]
-    split_save_path = "/content/drive/My Drive/Colab Data/M.Tech. Project/saved splits/Amazon/" + dataset_name + "/PPER v1/"
+    split_save_path = "/content/drive/My Drive/Colab Data/M.Tech. Project/saved splits/" + dataset_name + "/PPER v1/"
 
     yelp_data = False
     if len(sys.argv) > 2 and sys.argv[2] == 'yelp':

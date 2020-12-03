@@ -19,6 +19,7 @@ from .config import AmazonClothing_Config
 from .config import AmazonDigitalMusic_Config
 from .config import AmazonToysAndGames_Config
 from .config import AmazonVideoGames_Config
+from .config import GoodreadsChildren_Config
 # from .config import AmazonMusicalInstruments_Config
 # from .config import AmazonOfficeProducts_Config
 # from .config import AmazonBaby_Config

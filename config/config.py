@@ -305,3 +305,27 @@ class AmazonVideoGames_Config(DefaultConfig):
 
     batch_size = 128
     print_step = 100
+
+
+class GoodreadsChildren_Config(DefaultConfig):
+
+    def __init__(self):
+        self.set_path('GoodreadsChildren')
+
+    vocab_size = 50002
+    word_dim = 300
+
+    r_max_len = 202
+
+    u_max_r = 13
+    i_max_r = 24
+
+    train_data_size = 345761
+    test_data_size = 43100
+    val_data_size = 43099
+
+    user_num = 15586 + 2
+    item_num = 22402 + 2
+
+    batch_size = 128
+    print_step = 100

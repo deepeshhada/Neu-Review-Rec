@@ -281,3 +281,27 @@ class AmazonToysAndGames_Config(DefaultConfig):
 
     batch_size = 128
     print_step = 100
+
+
+class AmazonVideoGames_Config(DefaultConfig):
+
+    def __init__(self):
+        self.set_path('AmazonVideoGames')
+
+    vocab_size = 50002
+    word_dim = 300
+
+    r_max_len = 202
+
+    u_max_r = 13
+    i_max_r = 24
+
+    train_data_size = 185730
+    test_data_size = 23025
+    val_data_size = 23025
+
+    user_num = 24303 + 2
+    item_num = 10672 + 2
+
+    batch_size = 128
+    print_step = 100

@@ -7,24 +7,11 @@ from .config import DefaultConfig
 # from .config import Sports_and_Outdoors_data_Config
 # from .config import Clothing_Shoes_and_Jewelry_data_Config
 # from .config import Toys_and_Games_data_Config
-# from .config import Video_Games_data_Config
-# from .config import Movies_and_TV_data_Config
-# from .config import Kindle_Store_data_Config
-# from .config import yelp2013_data_Config
-# from .config import yelp2014_data_Config
-# from .config import Musical_Instruments_data_Config
-# from .config import AmazonInstantVideo_Config
-# from .config import AmazonLuxuryBeauty_Config
 from .config import AmazonClothing_Config
 from .config import AmazonDigitalMusic_Config
 from .config import AmazonToysAndGames_Config
 from .config import AmazonVideoGames_Config
 from .config import GoodreadsChildren_Config
-# from .config import AmazonMusicalInstruments_Config
-# from .config import AmazonOfficeProducts_Config
-# from .config import AmazonBaby_Config
-# from .config import AmazonPet_Config
-# from .config import yelp2016_data_Config
-# from .config import Tools_Improvement_data_Config
-# from .config import Automotive_data_Config
-# from .config import Patio_Lawn_and_Garden_data_Config
+from .config import AmazonBeerAdvocate_Config
+from .config import Yelp_1_Config
+from .config import Yelp_2_Config

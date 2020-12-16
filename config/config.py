@@ -307,10 +307,10 @@ class AmazonVideoGames_Config(DefaultConfig):
     print_step = 100
 
 
-class GoodreadsChildren_Config(DefaultConfig):
+class AmazonBeerAdvocate_Config(DefaultConfig):
 
     def __init__(self):
-        self.set_path('GoodreadsChildren')
+        self.set_path('AmazonBeerAdvocate')
 
     vocab_size = 50002
     word_dim = 300
@@ -320,12 +320,60 @@ class GoodreadsChildren_Config(DefaultConfig):
     u_max_r = 13
     i_max_r = 24
 
-    train_data_size = 345761
-    test_data_size = 43100
-    val_data_size = 43099
+    train_data_size = 1181424
+    test_data_size = 147604
+    val_data_size = 147605
 
-    user_num = 15586 + 2
-    item_num = 22402 + 2
+    user_num = 14643 + 2
+    item_num = 22087 + 2
+
+    batch_size = 128
+    print_step = 100
+
+
+class Yelp_1_Config(DefaultConfig):
+
+    def __init__(self):
+        self.set_path('Yelp_1')
+
+    vocab_size = 50002
+    word_dim = 300
+
+    r_max_len = 202
+
+    u_max_r = 13
+    i_max_r = 24
+
+    train_data_size = 794165
+    test_data_size = 98730
+    val_data_size = 98731
+
+    user_num = 83142 + 2
+    item_num = 29008 + 2
+
+    batch_size = 128
+    print_step = 100
+
+
+class Yelp_2_Config(DefaultConfig):
+
+    def __init__(self):
+        self.set_path('Yelp_2')
+
+    vocab_size = 50002
+    word_dim = 300
+
+    r_max_len = 202
+
+    u_max_r = 13
+    i_max_r = 24
+
+    train_data_size = 835858
+    test_data_size = 103973
+    val_data_size = 103974
+
+    user_num = 87455 + 2
+    item_num = 29625 + 2
 
     batch_size = 128
     print_step = 100

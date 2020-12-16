@@ -15,7 +15,7 @@ class DefaultConfig:
     gpu_ids = []
 
     seed = 2019
-    num_epochs = 50
+    num_epochs = 30
     num_workers = 0
 
     optimizer = 'Adam'

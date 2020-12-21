@@ -11,7 +11,6 @@ from .config import AmazonClothing_Config
 from .config import AmazonDigitalMusic_Config
 from .config import AmazonToysAndGames_Config
 from .config import AmazonVideoGames_Config
-from .config import GoodreadsChildren_Config
 from .config import AmazonBeerAdvocate_Config
 from .config import Yelp_1_Config
 from .config import Yelp_2_Config
